@@ -1,9 +1,16 @@
+import { useState } from "react";
+
 const Content = () => {
+  const [name, setName] = useState("User");
+
   const handleUsername = () => {
-    return "Desidério";
+    const usernames = ["Desidério", "Alis", "Sera"];
+    const index = Math.floor(Math.random() * 3);
+    setName(usernames[index]);
   }
 
   const buttonStyles = {
+    margin: ".2rem",
     padding: "1rem 2rem",
     background: "orange",
     color: "#222",
@@ -18,7 +25,8 @@ const Content = () => {
 
   return (
     <main className="main">
-      <p>Hello, {handleUsername()}</p>
+      <p>Welcome, {name}!</p>
+      <button style={buttonStyles} onClick={handleUsername}>Change username</button> <br />
       <button style={buttonStyles} onClick={handleClick}>Click me!</button>
     </main>
   )
