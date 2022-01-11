@@ -12,7 +12,8 @@ const Content = ({ items, onCheck, onDelete }) => {
       <ul className="list">
         {items.map(({id, checked, description}) => {
           return <Item
-            key={id}
+            key={id}  
+            id={id}
             checked={checked}
             description={description}
             onCheck={onCheck}
