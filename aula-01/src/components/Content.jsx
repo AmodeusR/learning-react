@@ -1,57 +1,31 @@
-import { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 
-const Content = () => {
-  const [items, setItems] = useState([{
-      id: 1,
-      checked: false,
-      description: "Lexus LFA"
-    },
-    {
-      id: 2,
-      checked: false,
-      description: "Lotus Exige S"
-    },
-    {
-      id: 3,
-      checked: false,
-      description: "Jaguar Type-R"
-    }
-  ]);
-
-  const handleCheck = (id) => {
-    const listItems = items.reduce((acc, item) => {
-      if (item.id === id) {
-        item.checked = item.checked === true ? false : true;
-        acc.push(item);
-        return acc;
-      } else {
-        acc.push(item);
-        return acc;
-      }
-    }, []);
-    
-    setItems(listItems);
-  }
+const Content = ({ items, onCheck, onDelete }) => {
+  const emptyListStyle = {
+    fontSize: "2rem",
+    fontWeight: "bold"
+  };
 
   return (
     <main className="main">
+        {items.length ? null : <p style={emptyListStyle}>There is nothing here 👀</p>}
       <ul className="list">
-        {items.map(item => {
+        {items.map(({id, checked, description}) => {
           return (
-            <li key={item.id} className="list-item">
+            <li key={id} className="list-item">
               <input
                 className="input-checkbox"
-                onChange={() => handleCheck(item.id)}
+                onChange={() => onCheck(id)}
                 type="checkbox"
                 name="selected-car"
-                id={item.id}
-                checked={item.checked}
+                id={id}
+                checked={checked}
               />
-              <label htmlFor={item.id}>{item.description}</label>
+              <label  style={checked ? {textDecoration: "line-through"} : null} htmlFor={id}>{description}</label>
               <FaTrashAlt
                 role="button"
                 tabIndex="0"
+                onClick={() => onDelete(id)}
               />
             </li>
           );

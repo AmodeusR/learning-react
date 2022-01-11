@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -28,11 +32,20 @@ code {
   min-height: 100vh;
 }
 
+.main {
+  margin-top: 2rem;
+  margin-bottom: auto;
+}
+
 .footer {
   width: 100%;
   background: #222;
   color: white;
   padding: 1.5rem;
+}
+
+.footer p {
+  margin: 0;
 }
 
 .list {

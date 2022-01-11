@@ -1,8 +1,12 @@
-const Footer = () => {
-  const date = new Date();
+const Footer = ({ totalItems }) => {
+  const style = {
+    fontSize: "2rem",
+    fontWeight: "bold"
+  }
+
   return (
     <footer className="footer">
-      <p>Copyright &copy; {date.toLocaleDateString("pt-br", {month: "long", year: "numeric"})}</p>
+      <p style={style}>{totalItems} {totalItems === 1 ? "Item" : "Items"}</p>
     </footer>
   )
 }
