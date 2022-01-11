@@ -1,4 +1,4 @@
-import { FaTrashAlt } from "react-icons/fa";
+import Item from "./Item";
 
 const Content = ({ items, onCheck, onDelete }) => {
   const emptyListStyle = {
@@ -11,24 +11,13 @@ const Content = ({ items, onCheck, onDelete }) => {
         {items.length ? null : <p style={emptyListStyle}>There is nothing here 👀</p>}
       <ul className="list">
         {items.map(({id, checked, description}) => {
-          return (
-            <li key={id} className="list-item">
-              <input
-                className="input-checkbox"
-                onChange={() => onCheck(id)}
-                type="checkbox"
-                name="selected-car"
-                id={id}
-                checked={checked}
-              />
-              <label  style={checked ? {textDecoration: "line-through"} : null} htmlFor={id}>{description}</label>
-              <FaTrashAlt
-                role="button"
-                tabIndex="0"
-                onClick={() => onDelete(id)}
-              />
-            </li>
-          );
+          return <Item
+            key={id}
+            checked={checked}
+            description={description}
+            onCheck={onCheck}
+            onDelete={onDelete}
+          />
         })}
       </ul>
     </main>
