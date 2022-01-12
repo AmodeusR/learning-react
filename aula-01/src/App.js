@@ -1,31 +1,21 @@
-import './App.css';
 import Header from "./components/Header";
+import SearchItem from "./components/SearchItem";
 import AddItem from "./components/AddItem";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
 import { useState } from "react";
-import Item from './components/Item';
 
 function App() {
+  const itemsList = JSON.parse(localStorage.getItem("shoppingList")) ?? [];
+ 
+  const [items, setItems] = useState(itemsList);
+  const [searchItem, setSearchItem] = useState("");
 
-  const [items, setItems] = useState([{
-      id: 1,
-      checked: false,
-      description: "Chocolate"
-    },
-    {
-      id: 2,
-      checked: false,
-      description: "Candy"
-    },
-    {
-      id: 3,
-      checked: false,
-      description: "Cookies"
-    }
-  ]);
 
-  const [newItem, setNewItem] = useState("");
+  const setAndSaveItems = (newItemsList) => {
+    localStorage.setItem("shoppingList", JSON.stringify(newItemsList));
+    setItems(newItemsList);
+  }
  
   const handleSubmission = e => {
     e.preventDefault();
@@ -35,15 +25,16 @@ function App() {
       checked: false,
       description: itemText
     }
-    const itemList = [...items];
-    itemList.push(newItem)
+
+    const itemsList = [...items];
+    itemsList.push(newItem)
     
-    setItems(itemList);
+    setAndSaveItems(itemsList);
     e.target.children[1].value = "";
   }
 
   const handleCheck = (id) => {
-    const listItems = items.reduce((acc, item) => {
+    const itemsList = items.reduce((acc, item) => {
       if (item.id === id) {
         item.checked = item.checked === true ? false : true;
         acc.push(item);
@@ -54,23 +45,25 @@ function App() {
       }
     }, []);
     
-    localStorage.setItem("shoppingList", JSON.stringify(listItems));
-    setItems(listItems);
+    setAndSaveItems(itemsList);
   }
 
   const handleDelete = id => {
-    const listItems = items.filter(item => item.id !== id);
+    const itemsList = items.filter(item => item.id !== id);
     
-    localStorage.setItem("shoppingList", JSON.stringify(listItems));
-    setItems(listItems);
+    setAndSaveItems(itemsList);
   }
 
   return (
     <div className="App">
-      <Header title="Groceries" />
+      <Header title="Lista de coisas aleatórias" />
       <AddItem onSubmit={handleSubmission} />
+      <SearchItem
+        searchItem={searchItem}
+        setSearchItem={setSearchItem}
+      />
       <Content
-        items={items}
+        items={items.filter(item => (item.description.toLowerCase()).includes(searchItem.toLowerCase()))}
         onCheck={handleCheck}
         onDelete={handleDelete}
       />

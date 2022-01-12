@@ -30,6 +30,7 @@ code {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  text-align: center;
   min-height: 100vh;
 }
 
@@ -88,10 +89,10 @@ code {
   justify-content: space-between;
   gap: .5rem;
   margin-bottom: 1rem;
-  margin-left: 4rem;
 }
 
 .item-form input[type="text"] {
+  flex-grow: 1;
   width: min(100%, 15rem);
   font-family: inherit;
   font-size: 1rem;
@@ -101,18 +102,24 @@ code {
 
 .item-form button {
   border: none;
-  width: 4rem;
   min-width: 3rem;
-  min-height: 3rem;
   background: royalblue;
-  transition: background 200ms ease;
+  transition: background 150ms ease;
 }
 
 .item-form button:hover {
-  background: gold;
+  background: hsl(220, 80%, 60%);
+}
+
+.item-form button:active {
+  background: hsl(220, 80%, 45%);
 }
 
 .item-form svg {
   color: white;
   font-size: 1.2rem;
+}
+
+#search-input {
+  width: 100%;
 }
