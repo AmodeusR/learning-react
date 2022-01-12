@@ -22,6 +22,7 @@ code {
   background: royalblue;
   color: #222;
   font-size: 1.2rem;
+  margin-bottom: 2rem;
 }
 
 .App {
@@ -33,7 +34,6 @@ code {
 }
 
 .main {
-  margin-top: 2rem;
   margin-bottom: auto;
 }
 
@@ -68,9 +68,51 @@ code {
 }
 
 .list-item svg:hover {
-  color: orange;
+  color: crimson;
 }
 
 .list-item label {
   margin-right: auto;
+}
+
+/* AddItem styles */
+
+.item-form label {
+  position: absolute;
+  left: -9000px;
+}
+
+.item-form {
+  display: flex;
+  width: min(90%, 20rem);
+  justify-content: space-between;
+  gap: .5rem;
+  margin-bottom: 1rem;
+  margin-left: 4rem;
+}
+
+.item-form input[type="text"] {
+  width: min(100%, 15rem);
+  font-family: inherit;
+  font-size: 1rem;
+
+  padding: .5rem;
+}
+
+.item-form button {
+  border: none;
+  width: 4rem;
+  min-width: 3rem;
+  min-height: 3rem;
+  background: royalblue;
+  transition: background 200ms ease;
+}
+
+.item-form button:hover {
+  background: gold;
+}
+
+.item-form svg {
+  color: white;
+  font-size: 1.2rem;
 }

@@ -1,12 +1,14 @@
 import './App.css';
 import Header from "./components/Header";
+import AddItem from "./components/AddItem";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
 import { useState } from "react";
+import Item from './components/Item';
 
 function App() {
 
-    const [items, setItems] = useState([{
+  const [items, setItems] = useState([{
       id: 1,
       checked: false,
       description: "Chocolate"
@@ -22,6 +24,23 @@ function App() {
       description: "Cookies"
     }
   ]);
+
+  const [newItem, setNewItem] = useState("");
+ 
+  const handleSubmission = e => {
+    e.preventDefault();
+    const itemText = e.target.children[1].value;
+    const newItem = {
+      id: items.length + 1,
+      checked: false,
+      description: itemText
+    }
+    const itemList = [...items];
+    itemList.push(newItem)
+    
+    setItems(itemList);
+    e.target.children[1].value = "";
+  }
 
   const handleCheck = (id) => {
     const listItems = items.reduce((acc, item) => {
@@ -49,6 +68,7 @@ function App() {
   return (
     <div className="App">
       <Header title="Groceries" />
+      <AddItem onSubmit={handleSubmission} />
       <Content
         items={items}
         onCheck={handleCheck}
