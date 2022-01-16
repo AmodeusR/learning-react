@@ -1,0 +1,76 @@
+:root {
+  --border-color: #5b616e;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  background-color: #282c34;
+  min-height: 100vh;
+  /* color: white; */
+}
+
+.main-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+
+  width: min(25rem, 90%);
+  margin-inline: auto;
+  min-height: 100vh;
+}
+
+.color-displayer {
+  display: flex;
+  place-items: center;
+  border-radius: 50%;
+  max-height: 20rem;
+  max-width: 20rem;
+  width: 90vw;
+  height: 90vw;
+  
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+
+  border: 2px solid var(--border-color);
+  transition: background 400ms ease;
+}
+
+.color-displayer p {
+  margin: 0 auto;
+}
+
+.input-label {
+  position: absolute;
+  left: -8000px;
+}
+
+.color-input {
+  font-size: 1.2rem;
+  width: 100%;
+  padding: .5em;
+  border: 3px solid var(--border-color);
+  border-radius: 8px;
+  transition: border-color 200ms ease;
+}
+
+.color-input:focus {  
+  outline: none;
+  border-color: rgb(116, 149, 250);
+}
+
