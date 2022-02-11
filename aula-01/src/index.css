@@ -123,3 +123,9 @@ code {
 #search-input {
   width: 100%;
 }
+
+.error {
+  color: crimson;
+  font-weight: bold;
+  font-size: 1.2rem;
+}

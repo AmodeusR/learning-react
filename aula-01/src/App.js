@@ -3,19 +3,37 @@ import SearchItem from "./components/SearchItem";
 import AddItem from "./components/AddItem";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import apiRequest from "./components/apiRequest";
+
 
 function App() {
-  const itemsList = JSON.parse(localStorage.getItem("shoppingList")) ?? [];
+  const API_URL = "http://localhost:3500/items";
  
-  const [items, setItems] = useState(itemsList);
+  const [items, setItems] = useState([]);
   const [searchItem, setSearchItem] = useState("");
+  const [fetchError, setFetchError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error("Did not receive expected data.");
+        const data = await response.json();
+        
+        setItems(data);
+        setFetchError(null);
+      } catch(err) {
+        setFetchError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
 
-  const setAndSaveItems = (newItemsList) => {
-    localStorage.setItem("shoppingList", JSON.stringify(newItemsList));
-    setItems(newItemsList);
-  }
+    fetchItems();
+  }, []);
+  
  
   const handleSubmission = e => {
     e.preventDefault();
@@ -29,7 +47,7 @@ function App() {
     const itemsList = [...items];
     itemsList.push(newItem)
     
-    setAndSaveItems(itemsList);
+    setItems(itemsList);
     e.target.children[1].value = "";
   }
 
@@ -45,13 +63,13 @@ function App() {
       }
     }, []);
     
-    setAndSaveItems(itemsList);
+    setItems(itemsList);
   }
 
   const handleDelete = id => {
     const itemsList = items.filter(item => item.id !== id);
     
-    setAndSaveItems(itemsList);
+    setItems(itemsList);
   }
 
   return (
@@ -62,11 +80,16 @@ function App() {
         searchItem={searchItem}
         setSearchItem={setSearchItem}
       />
-      <Content
-        items={items.filter(item => (item.description.toLowerCase()).includes(searchItem.toLowerCase()))}
-        onCheck={handleCheck}
-        onDelete={handleDelete}
-      />
+      <main className="main">
+        {isLoading && <p>Loading items...</p>}
+        {fetchError && <p className="error">Error: {fetchError}</p>}
+        {!fetchError && !isLoading &&
+          <Content
+            items={items.filter(item => (item.description.toLowerCase()).includes(searchItem.toLowerCase()))}
+            onCheck={handleCheck}
+            onDelete={handleDelete}
+        />}
+      </main>
       <Footer totalItems={items.length} />
     </div>
   );

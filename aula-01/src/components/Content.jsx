@@ -7,7 +7,7 @@ const Content = ({ items, onCheck, onDelete }) => {
   };
 
   return (
-    <main className="main">
+    <>
         {items.length ? null : <p style={emptyListStyle}>There is nothing here 👀</p>}
       <ul className="list">
         {items.map(({id, checked, description}) => {
@@ -21,7 +21,7 @@ const Content = ({ items, onCheck, onDelete }) => {
           />
         })}
       </ul>
-    </main>
+    </>
   )
 }
 
