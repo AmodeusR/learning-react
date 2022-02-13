@@ -1,3 +1,12 @@
+:root {
+
+  --background-dark: #232529;
+  --background-light: #33363d;
+
+  --border-clr: #3ba171;
+  --border-width: 2px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,7 +15,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background: #232529;
+  background: var(--background-dark);
 }
 
 code {
@@ -16,6 +25,8 @@ code {
 
 .menu {
   display: flex;
+  position: sticky;
+  top: 0;
 }
 
 .menu > button {
@@ -25,7 +36,7 @@ code {
   font-size: 1.2rem;
   font-weight: bolder;
   color: white;
-  background: #33363d;
+  background: var(--background-light);
   border: none;
   transition: background 150ms ease;
 }
@@ -40,11 +51,43 @@ code {
   cursor: initial;
 }
 
-.list {
+.list,
+.table {
   color: white;
   font-size: 1.1rem;
 }
 
 .list li + li {
   margin-top: 1.3rem;
+}
+
+.table-container {
+  overflow: auto;
+}
+
+.table {
+  margin: 2rem auto;
+  max-width: 90%;
+  min-width: 75rem;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: .5rem;
+}
+
+td + td {
+  border-left: var(--border-width) solid var(--border-clr);
+}
+th + th {
+  border-left: var(--border-width) solid var(--border-clr);
+}
+
+tr:nth-child(odd) :not(th) {
+  background: var(--background-light);
+}
+
+th {
+  background: var(--border-clr);
+  border-bottom: var(--border-width) solid var(--border-clr)
 }

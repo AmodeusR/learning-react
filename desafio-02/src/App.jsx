@@ -1,5 +1,6 @@
 import Menu from "./components/Menu";
 import List from "./components/List";
+import Table from "./components/Table";
 import { useState, useEffect } from "react";
 
 
@@ -29,7 +30,7 @@ function App() {
   return (
     <div className="App">
       <Menu selectedButton={selectedButton} setSelectedButton={setSelectedButton} />
-      <List fetchedData={fetchedData} />
+      <Table data={fetchedData} />
     </div>
   )
 }
