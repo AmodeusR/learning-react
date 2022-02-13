@@ -6,13 +6,13 @@ import { useState, useEffect } from "react";
 function App() {
   const API_URL = "https://jsonplaceholder.typicode.com";
 
-  const [selectedButton, setSelectedButton] = useState("");
+  const [selectedButton, setSelectedButton] = useState("users");
   const [fetchedData, setFetchedData] = useState([]);
 
   useEffect(() => {
     const fecthApi = async () => {
       try {
-        const response = selectedButton ? await fetch(`${API_URL}/${selectedButton}`) : await fetch(`${API_URL}/users`);
+        const response = await fetch(`${API_URL}/${selectedButton}`);
         const data = await response.json();
         setFetchedData(data);
         
@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      <Menu setSelectedButton={setSelectedButton} />
+      <Menu selectedButton={selectedButton} setSelectedButton={setSelectedButton} />
       <List fetchedData={fetchedData} />
     </div>
   )

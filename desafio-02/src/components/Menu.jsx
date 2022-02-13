@@ -1,15 +1,16 @@
 import React from "react";
+import Button from "./Button";
 
-function Menu({ setSelectedButton }) {
+function Menu({ selectedButton, setSelectedButton }) {
   const handleButtonClick = e => {
     setSelectedButton(e.target.textContent.toLowerCase());
   }
 
   return (
     <nav className="menu" onClick={e => handleButtonClick(e)}>
-      <button type="button">Users</button>
-      <button type="button">Posts</button>
-      <button type="button">Comments</button>
+      <Button selectedButton={selectedButton} buttonText="Users" />
+      <Button selectedButton={selectedButton} buttonText="Posts" />
+      <Button selectedButton={selectedButton} buttonText="Comments" />
     </nav>
   )
 }

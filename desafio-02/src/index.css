@@ -31,12 +31,13 @@ code {
 }
 
 .menu > button:hover {
-  background: hsl(222, 12%, 28%);
+  background: #3f4450;
   cursor: pointer;
 }
 
-.menu > button + button {
-  border-left: 3px solid #545964;
+.menu > button.selected {
+  background: royalblue;
+  cursor: initial;
 }
 
 .list {
