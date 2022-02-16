@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
+.link {
+  color: hsl(192, 90%, 60%);
+  text-decoration: none;
+}
+
+.link:visited {
+  color: hsl(234, 60%, 60%);
+
+}
+
 * {
   margin: 0;
   padding: 0;

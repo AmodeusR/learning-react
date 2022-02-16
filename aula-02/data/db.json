@@ -1,0 +1,22 @@
+{
+  "posts": [
+    {
+      "id": 1645020078561,
+      "title": "Olá",
+      "datetime": "February 16, 2022, 11:01:18 AM",
+      "body": "Sejam bem-vindos todos!"
+    },
+    {
+      "id": 1645020107942,
+      "title": "Meu segundo post",
+      "datetime": "February 16, 2022, 11:01:47 AM",
+      "body": "uau, o Axios é super prático :0"
+    },
+    {
+      "id": 1645020413014,
+      "title": "Meu último post teste",
+      "datetime": "February 16, 2022, 11:06:53 AM",
+      "body": "Xaau!"
+    }
+  ]
+}

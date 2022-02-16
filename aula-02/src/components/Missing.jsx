@@ -1,10 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { Link } from "react-router-dom";
 
 const Missing = () => {
   return (
-    <div>
-      <h1>Missing</h1>
-    </div>
+    <main className="Missing">
+      <h2>Page not Found</h2>
+      <p>Well, that's disappointing.</p>
+      <Link to="/">
+        <p>Go to homepage.</p>
+      </Link>
+    </main>
   );
 }
 
