@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import NewPost from "./components/NewPost";
 import PostPage from "./components/PostPage";
+import EditPost from "./components/EditPost";
 import About from "./components/About";
 import Missing from "./components/Missing";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
@@ -19,6 +20,8 @@ function App() {
 
   const [postTitle, setPostTitle] = useState("");
   const [postBody, setPostBody] = useState("");
+  const [editTitle, setEditTitle] = useState("");
+  const [editBody, setEditBody] = useState("");
 
   useEffect(() => {
     const filteredPosts = posts.filter(post => (
@@ -75,7 +78,7 @@ function App() {
 
     
     try {
-      const response = api.post("./posts", newPost);
+      const response = api.post("/posts", newPost);
       const newPosts = [...posts, response.data];
       
       setPosts(newPosts);
@@ -88,11 +91,41 @@ function App() {
     }
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const newPosts = posts.filter(post => post.id !== id);
-    
-    setPosts(newPosts);
-    navigate("./");
+
+    try {
+      const response = await api.delete(`/posts/${id}`);
+      
+      setPosts(newPosts);
+      navigate("./");
+    } catch (err) {
+      console.error(`Error: ${err.message}`);
+    }
+  }
+
+  const handleEdit = async (id) => {
+    const datetime = new Date().toLocaleTimeString("en-us", {month: 'long', day: 'numeric', year: "numeric",})
+
+    const updatedPost = {
+      id,
+      title: editTitle,
+      datetime,
+      body: editBody
+    };
+
+    try {
+      const response = await api.put(`/posts/${id}`, updatedPost);
+      setPosts(posts.map(post => post.id === id ? { ...response.data } : post));
+      console.log(posts.map(post => post.id === id ? { ...response.data } : post));
+
+      setEditTitle("");
+      setEditBody("");
+      navigate("/");
+    } catch (err) {
+      console.error(err.message);
+    }
+
   }
 
   return (
@@ -113,6 +146,14 @@ function App() {
           postBody={postBody}
           setPostTitle={setPostTitle}
           setPostBody={setPostBody}
+        />} />
+        <Route path="/edit/:id" element={<EditPost
+          posts={posts}
+          onEdit={handleEdit}
+          editTitle={editTitle}
+          editBody={editBody}
+          setEditTitle={setEditTitle}
+          setEditBody={setEditBody}
         />} />
         <Route path="/post/:id" element={<PostPage posts={posts} onDelete={handleDelete} />} />
       

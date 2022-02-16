@@ -13,7 +13,10 @@ const PostPage = ({ posts, onDelete }) => {
             <h2>{post.title}</h2>
             <p className="postDate">{post.datetime}</p>
             <p className="postBody">{post.body}</p>
-            <button onClick={() => onDelete(post.id)}>Delete</button>
+            <Link to={`/edit/${post.id}`}>
+              <button className="editButton" type="button">Edit</button>
+            </Link>
+            <button className="deleteButton" onClick={() => onDelete(post.id)}>Delete</button>
           </>
         }
         {!post &&

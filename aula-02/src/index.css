@@ -10,6 +10,30 @@
 
 }
 
+.editButton {
+  border: none;
+  background: limegreen!important;
+  transition: background 150ms;
+}
+.editButton:hover {
+  border: none;
+  background: hsl(120, 61%, 40%) !important;
+}
+
+.deleteButton {
+  border: none;
+  background: crimson!important;
+  margin-left: .5rem;
+  transition: background 150ms;
+}
+
+.deleteButton:hover {
+  border: none;
+  background: hsl(348, 83%, 40%)!important;
+  margin-left: .5rem;
+  transition: background 150ms;
+}
+
 * {
   margin: 0;
   padding: 0;
