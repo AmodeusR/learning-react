@@ -11,11 +11,16 @@ import Missing from "./components/Missing";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import api from "./api/posts";
 
+// custom hooks
+
+import useWindowSize from './hooks/useWindowSize';
+import useAxiosFetch from './hooks/useAxiosFetch';
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const { width: windowWidth } = useWindowSize();
   const navigate = useNavigate();
 
   const [postTitle, setPostTitle] = useState("");
@@ -35,23 +40,12 @@ function App() {
 
   // API Storage Management
 
+  const {data: postsData, fetchError, isLoading} = useAxiosFetch("/posts");
+
   useEffect(() => {
-    const fetchAPI = async () => {
-      try {
-        const response = await api.get("/posts");
-        setPosts(response.data);
+    setPosts(postsData);
 
-      } catch (err) {
-        if (!err.response) console.log(`Error: ${err.message}`);
-
-        const {response: {data, status, headers}} = err;
-        console.table(data, status, headers);
-      }
-
-    }
-
-    fetchAPI();
-  }, []);
+  }, [postsData]);
 
   // Local Storage Management
 
@@ -130,13 +124,14 @@ function App() {
 
   return (
     <div className="App">
-      <Header title="ReactJS Blog" />
+      <Header title="ReactJS Blog" windowWidth={windowWidth} />
       <Nav search={search} setSearch={setSearch} />
       <Routes>
         <Route path="/" index element={
           <Home
             posts={searchResults}
-            setPosts={setPosts}
+            fetchError={fetchError}
+            isLoading={isLoading}
           />}
         />
         
