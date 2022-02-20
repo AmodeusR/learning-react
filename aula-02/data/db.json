@@ -17,6 +17,30 @@
       "title": "O poder de um await",
       "datetime": "February 16, 2022, 12:22:12 PM",
       "body": "Agora sim, essa bagaça está consertada 😎"
+    },
+    {
+      "id": 1645359285178,
+      "title": "Meu mais novo post após o ContextAPI hihi",
+      "datetime": "February 20, 2022, 9:14:45 AM",
+      "body": "Vendo se tá funcionando tudo normal aqui 👀 Será?..."
+    },
+    {
+      "id": 1645363437957,
+      "title": "E lá vamos nós... ",
+      "datetime": "February 20, 2022, 10:35:59 AM",
+      "body": "Edição tentativa 2"
+    },
+    {
+      "id": 1645368117406,
+      "title": "Tudo pelo ContextAPI",
+      "datetime": "February 20, 2022, 11:41:57 AM",
+      "body": "Parece que tá tudo funcionando pelo ContextAPI do React 👌"
+    },
+    {
+      "id": 1645369667601,
+      "title": "ContextAPI refatorado",
+      "datetime": "February 20, 2022, 12:26:28 PM",
+      "body": "Foi feito uma refatoração, tirando do ContextAPI e pondo diretamente nos componentes que não necessitavam passar seus parâmetros para outros componentes."
     }
   ]
 }
