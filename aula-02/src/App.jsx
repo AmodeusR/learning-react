@@ -7,19 +7,27 @@ import PostPage from "./components/PostPage";
 import EditPost from "./components/EditPost";
 import About from "./components/About";
 import Missing from "./components/Missing";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
-import { DataProvider } from './context/DataContext';
-
+import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import useAxiosFetch from "./hooks/useAxiosFetch";
+import { useStoreActions } from "easy-peasy";
 
 function App() {
- 
+  const setPosts = useStoreActions(actions => actions.setPosts);
+  const {data: postsData, fetchError, isLoading} = useAxiosFetch("/posts");
+
+  useEffect(() => {
+    setPosts(postsData);
+
+  }, [postsData, setPosts]);
+
+
   return (
     <div className="App">
       <Header title="ReactJS Blog"/>
-      <DataProvider>
         <Nav  />
         <Routes>
-          <Route path="/" index element={<Home />} />
+          <Route path="/" index element={<Home fetchError={fetchError} isLoading={isLoading} />} />
         
           <Route path="/post" element={<NewPost />} />
           <Route path="/edit/:id" element={<EditPost />} />
@@ -29,7 +37,6 @@ function App() {
           <Route path="*" element={ <Missing /> } />
         
         </Routes>
-      </DataProvider>
         <Footer />
     </div>
   );
