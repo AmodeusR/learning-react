@@ -41,6 +41,12 @@
       "title": "ContextAPI refatorado",
       "datetime": "February 20, 2022, 12:26:28 PM",
       "body": "Foi feito uma refatoração, tirando do ContextAPI e pondo diretamente nos componentes que não necessitavam passar seus parâmetros para outros componentes."
+    },
+    {
+      "id": 1645376342030,
+      "title": "Teste com Easy-Peasy",
+      "datetime": "February 20, 2022, 3:41:39 PM",
+      "body": "Easy-Peasy é um gerenciador de estados baseado no Redux"
     }
   ]
 }
